@@ -24,6 +24,9 @@ function whichOperatingSystem {
 	# Fedora
         elif [[ -f /etc/fedora-release ]]; then
 	    DIST="Fedora"
+	#Nixos and Nixpkgs systems
+	elif command -v nix &> /dev/null; then
+	    DIST="Nixos"
 
         # Other
         else
@@ -153,6 +156,13 @@ function installDependencies () {
             fi
         done
         ;;
+        
+    Nixos)
+    # do nothing this sould be run inside a nix shell with all dependancies:
+        for var in "$@"
+            do
+            echo $var
+        done
 
     esac
 
